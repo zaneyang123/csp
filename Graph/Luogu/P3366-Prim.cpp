@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <queue>
-#include <climits>
+#include<bits/stdc++.h>
 using namespace std;
 
 /**
