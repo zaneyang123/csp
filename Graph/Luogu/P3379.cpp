@@ -29,7 +29,8 @@ using namespace std;
 4
 */
 
-const int MAXN=10050,MAXF=16;
+//数据储存方式
+const int MAXN=500050,MAXF=19;
 
 vector<int> G[MAXN];//存图
 int depth[MAXN];//点深度
@@ -37,9 +38,9 @@ int father[MAXN][MAXF];//[i][j]为第i个点的距离为2^j的祖先
 bool vis[MAXN];//访问标记
 
 /*
-假设与u距离25=32步的祖先节点为v
+假设与u距离2^5=32步的祖先节点为v
 
-那么与u距离26=64步的祖先节点，也就是与v距离25=32步的祖先节点
+那么与u距离2^6=64步的祖先节点，也就是与v距离2^5=32步的祖先节点
 
 又因为深度优先搜索，所以一旦搜索到某个节点u
 
@@ -51,6 +52,8 @@ bool vis[MAXN];//访问标记
 
 所以关系为 father[pos] [i] = father[ father[pos] [i-1] ] [i-1]
 */
+
+//dfs处理与每个节点存在指数关系的father以及深度depth
 void dfs(int pos,int fa)
 {
 	vis[pos]=true;
@@ -66,6 +69,7 @@ void dfs(int pos,int fa)
 	}
 }
 
+//求出最近公共祖先LCA
 int lca(int a,int b)
 {
 	while(depth[a]<depth[b])//如果b的深度比a大
@@ -104,6 +108,7 @@ int lca(int a,int b)
 
 int main()
 {
+	//输入数据的处理与调用
 	int n,m,s,a,b;
 	scanf("%d%d%d",&n,&m,&s);
 
