@@ -6,6 +6,13 @@ using namespace std;
 * SPFA实现方式
 * Luogu-3371
 */
+/**
+spfa的本质是广度优先搜索，将图所有的边都遍历一遍。平均时间复杂度是O(m)，最坏时间复杂度是O(mn)，其中m是图的边数。
+1、实现spfa算法需要一个队列q，一个标记数组vis[N]用来标记某点是否在队列中。数组dist[N]，用来存储起点到某个点的最短距离。
+2、初始化dist数组为正无穷
+3、从起点开始枚举每个点的所有子节点，设父节点到子节点的距离为s，父节点到起点的距离为dist[u]，子节点到起点的距离为dist[v]，如果dist[u]+s<dist[v],当且仅当上式成立时就更新dist[v]，如果v没有在队列中，就将v入队。
+
+*/
 
 struct Edge
 {
@@ -50,6 +57,7 @@ void spfa(int s)
                 dis[w] = dis[cur] + e.distance;
                 if (!isInqueue[w])
                 {
+                    isInqueue[w] = true;
                     q.push(w);
                 }
             }

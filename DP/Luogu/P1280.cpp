@@ -28,6 +28,7 @@ int main()
 
     sort(z + 1, z + k + 1, cmp);  
 
+    //f[i]表示i~n的最大空闲时间
     for(i = n; i >= 1; i--) //倒着搜   
     {  
         if(sum[i] == 0)  
