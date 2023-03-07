@@ -46,7 +46,7 @@ void dijkstra()
     dis[1] = 0;
     //起点入堆
     q.push((node){0, 1});
-    ans[1] = 1;
+    ans[1] = 1;  //初始化 一条路
     //直到堆为空
     while( !q.empty() )
     {
@@ -68,18 +68,18 @@ void dijkstra()
         for(int i = head[x]; i; i = e[i].next)
         {
             int y = e[i].to;
-            if(dis[x] + e[i].dis < dis[y])
+            if(dis[x] + e[i].dis < dis[y]) //更新逻辑
             {
                 dis[y] = dis[x] + e[i].dis;
                 //下一个节点未访问过，则出列
                 if(!vis[y])
                 {
-                    ans[y] = ans[x];
+                    ans[y] = ans[x];                  //注意：最短路无多解，此时走到y的最短路条数跟上一个点的一样
                     q.push((node){dis[y], y});
                 }
-            } else if (dis[x] + e[i].dis == dis[y])
+            } else if (dis[x] + e[i].dis == dis[y])  //相等时，最短路有多解，并计数
             {
-                ans[y] = (ans[y] + ans[x]) % 100003;
+                ans[y] = (ans[y] + ans[x]) % 100003;  //注意：最短路有多解，那么需要相加
             }
         }
     }
@@ -92,7 +92,7 @@ int main()
     for(int i = 1; i <= n; ++i) 
     {
         dis[i] = INT_MAX;
-        ans[i] = 0;
+        ans[i] = 0; 
     }
     //建图
     for(int i = 0; i < m; ++i)
